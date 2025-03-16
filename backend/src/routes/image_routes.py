@@ -1,32 +1,20 @@
-from flask import Blueprint, request, jsonify
-from agents.image_generation_agent import ImageGenerationAgent
+from fastapi import FastAPIRouter, HTTPException
+from routes import image_routes, story_routes, script_routes, tts_routes, video_routes
+t ImageGenerationAgent
+app = FastAPI()
 
-image_routes = Blueprint('image_routes', __name__)
-image_agent = ImageGenerationAgent()
+app.include_router(image_routes.router, prefix="/images", tags=["images"])
+app.include_router(story_routes.router, prefix="/stories", tags=["stories"])
+app.include_router(script_routes.router, prefix="/scripts", tags=["scripts"])t(BaseModel):
+app.include_router(tts_routes.router, prefix="/tts", tags=["tts"])
+app.include_router(video_routes.router, prefix="/videos", tags=["videos"])
 
-@image_routes.route('/generate-image', methods=['POST'])
-def generate_image():
-    data = request.json
-    prompt = data.get('prompt')
-    if not prompt:
-        return jsonify({'error': 'Prompt is required'}), 400
-
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)@router.post("/regenerate-image")
+async def regenerate_image(request: RegenerateImageRequest):
     try:
-        image_url = image_agent.generate_image(prompt)
-        return jsonify({'image_url': image_url}), 200
+        new_image_url = image_agent.regenerate_image(request.image_id, request.new_prompt)
+        return {"new_image_url": new_image_url}
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
-@image_routes.route('/regenerate-image', methods=['POST'])
-def regenerate_image():
-    data = request.json
-    image_id = data.get('image_id')
-    new_prompt = data.get('new_prompt')
-    if not image_id or not new_prompt:
-        return jsonify({'error': 'Image ID and new prompt are required'}), 400
-
-    try:
-        new_image_url = image_agent.regenerate_image(image_id, new_prompt)
-        return jsonify({'new_image_url': new_image_url}), 200
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        raise HTTPException(status_code=500, detail=str(e))

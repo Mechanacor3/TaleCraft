@@ -1,22 +1,14 @@
-from flask import Flask
-from routes.story_routes import story_bp
-from routes.image_routes import image_bp
-from routes.script_routes import script_bp
-from routes.tts_routes import tts_bp
-from routes.video_routes import video_bp
+from fastapi import FastAPI
+from routes import image_routes, story_routes, script_routes, tts_routes, video_routes
 
-def create_app():
-    app = Flask(__name__)
+app = FastAPI()
 
-    # Register blueprints for different routes
-    app.register_blueprint(story_bp)
-    app.register_blueprint(image_bp)
-    app.register_blueprint(script_bp)
-    app.register_blueprint(tts_bp)
-    app.register_blueprint(video_bp)
-
-    return app
+app.include_router(image_routes.router, prefix="/images", tags=["images"])
+app.include_router(story_routes.router, prefix="/stories", tags=["stories"])
+app.include_router(script_routes.router, prefix="/scripts", tags=["scripts"])
+app.include_router(tts_routes.router, prefix="/tts", tags=["tts"])
+app.include_router(video_routes.router, prefix="/videos", tags=["videos"])
 
 if __name__ == "__main__":
-    app = create_app()
-    app.run(debug=True)
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
