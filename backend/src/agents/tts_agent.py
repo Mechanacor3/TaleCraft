@@ -1,5 +1,5 @@
 class TTSAgent:
-    def __init__(self, tts_processor):
+    def __init__(self, tts_processor=None):
         self.tts_processor = tts_processor
 
     def select_voice_style(self, style):

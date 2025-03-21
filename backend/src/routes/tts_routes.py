@@ -1,22 +1,23 @@
-from flask import Blueprint, request, jsonify
-from src.agents.tts_agent import TTSAgent
+from fastapi import APIRouter, HTTPException
+from pydantic import BaseModel
+from ..agents.tts_agent import TTSAgent
 
-tts_routes = Blueprint('tts_routes', __name__)
+router = APIRouter()
 tts_agent = TTSAgent()
 
-@tts_routes.route('/generate_audio', methods=['POST'])
-def generate_audio():
-    data = request.json
-    text = data.get('text')
-    voice_style = data.get('voice_style')
+class GenerateAudioRequest(BaseModel):
+    text: str
+    voice_style: str
 
-    if not text or not voice_style:
-        return jsonify({'error': 'Text and voice style are required.'}), 400
+@router.post("/generate_audio")
+async def generate_audio(request: GenerateAudioRequest):
+    if not request.text or not request.voice_style:
+        raise HTTPException(status_code=400, detail="Text and voice style are required.")
+    
+    audio_clip = tts_agent.generate_audio(request.text, request.voice_style)
+    return {"audio_clip": audio_clip}
 
-    audio_clip = tts_agent.generate_audio(text, voice_style)
-    return jsonify({'audio_clip': audio_clip}), 200
-
-@tts_routes.route('/available_voices', methods=['GET'])
-def available_voices():
+@router.get("/available_voices")
+async def available_voices():
     voices = tts_agent.get_available_voices()
-    return jsonify({'voices': voices}), 200
+    return {"voices": voices}

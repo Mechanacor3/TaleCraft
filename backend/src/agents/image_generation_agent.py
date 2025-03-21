@@ -1,5 +1,5 @@
 class ImageGenerationAgent:
-    def __init__(self, openai_api_key):
+    def __init__(self, openai_api_key=None):
         self.openai_api_key = openai_api_key
 
     def generate_image(self, prompt):

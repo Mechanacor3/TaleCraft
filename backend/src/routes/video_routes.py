@@ -1,30 +1,29 @@
-from flask import Blueprint, request, jsonify
-from agents.video_assembly_agent import VideoAssemblyAgent
+from fastapi import APIRouter, HTTPException
+from pydantic import BaseModel
+from ..agents.video_assembly_agent import VideoAssemblyAgent
 
-video_routes = Blueprint('video_routes', __name__)
+router = APIRouter()
 video_agent = VideoAssemblyAgent()
 
-@video_routes.route('/assemble_video', methods=['POST'])
-def assemble_video():
-    data = request.json
-    images = data.get('images')
-    audio = data.get('audio')
-    
-    if not images or not audio:
-        return jsonify({'error': 'Images and audio are required.'}), 400
-    
-    video_path = video_agent.assemble_video(images, audio)
-    
-    return jsonify({'video_path': video_path}), 200
+class AssembleVideoRequest(BaseModel):
+    images: list[str]
+    audio: str
 
-@video_routes.route('/preview_video', methods=['POST'])
-def preview_video():
-    data = request.json
-    video_path = data.get('video_path')
+class PreviewVideoRequest(BaseModel):
+    video_path: str
+
+@router.post("/assemble_video")
+async def assemble_video(request: AssembleVideoRequest):
+    if not request.images or not request.audio:
+        raise HTTPException(status_code=400, detail="Images and audio are required.")
     
-    if not video_path:
-        return jsonify({'error': 'Video path is required.'}), 400
+    video_path = video_agent.assemble_video(request.images, request.audio)
+    return {"video_path": video_path}
+
+@router.post("/preview_video")
+async def preview_video(request: PreviewVideoRequest):
+    if not request.video_path:
+        raise HTTPException(status_code=400, detail="Video path is required.")
     
-    preview_url = video_agent.preview_video(video_path)
-    
-    return jsonify({'preview_url': preview_url}), 200
+    preview_url = video_agent.preview_video(request.video_path)
+    return {"preview_url": preview_url}
