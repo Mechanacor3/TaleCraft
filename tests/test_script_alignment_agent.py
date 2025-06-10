@@ -29,3 +29,13 @@ def test_update_script(agent):
     updated = agent.update_script(new_script)
     assert agent.script == new_script
     assert updated == new_script
+
+
+def test_generate_script_summary_includes_all_entries(agent):
+    aligned = [
+        {"image": "img1.png", "dialogue": "Hello"},
+        {"image": "img2.png", "dialogue": "World"},
+    ]
+    summary = agent.generate_script_summary(aligned)
+    assert "Image: img1.png, Dialogue: Hello" in summary
+    assert "Image: img2.png, Dialogue: World" in summary
