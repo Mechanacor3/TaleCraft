@@ -1,18 +1,9 @@
 class ScriptAlignmentAgent:
-    def __init__(self):
+    def __init__(self) -> None:
         self.script: list[str] = []
 
     def align_script_with_images(self, images, script):
-        """
-        Aligns a list of script dialogue lines with the given images.
-
-        Parameters:
-        - images: List of image paths or URLs.
-        - script: List of dialogue strings to be aligned.
-
-        Returns:
-        - aligned_script: A structured representation of the script aligned with images.
-        """
+        """Align a list of script dialogue lines with the given images."""
         aligned_script = []
         for i, image in enumerate(images):
             aligned_script.append(
@@ -21,31 +12,13 @@ class ScriptAlignmentAgent:
         return aligned_script
 
     def adjust_dialogue(self, aligned_script, index, new_dialogue):
-        """
-        Adjusts the dialogue at the specified index in the aligned script.
-
-        Parameters:
-        - aligned_script: The structured representation of the script aligned with images.
-        - index: The index of the dialogue to be adjusted.
-        - new_dialogue: The new dialogue text to replace the existing one.
-
-        Returns:
-        - updated_script: The updated aligned script with the modified dialogue.
-        """
+        """Adjust the dialogue at the specified index in the aligned script."""
         if 0 <= index < len(aligned_script):
             aligned_script[index]["dialogue"] = new_dialogue
         return aligned_script
 
     def generate_script_summary(self, aligned_script):
-        """
-        Generates a summary of the aligned script.
-
-        Parameters:
-        - aligned_script: The structured representation of the script aligned with images.
-
-        Returns:
-        - summary: A summary of the script.
-        """
+        """Generate a summary of the aligned script."""
         summary = "Script Summary:\n"
         for item in aligned_script:
             summary += f"Image: {item['image']}, Dialogue: {item['dialogue']}\n"
