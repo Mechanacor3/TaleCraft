@@ -72,6 +72,33 @@ def test_generate_image_route():
         mock_img.assert_called_once_with("cat")
 
 
+def test_modify_image_route():
+    with patch.object(
+        image_routes.image_agent,
+        "modify_image",
+        return_value="http://edited",
+    ) as mock_mod:
+        payload = {"image_path": "path.png", "new_prompt": "dog"}
+        response = client.put("/images/modify-image", json=payload)
+        assert response.status_code == 200
+        assert response.json() == {"image_url": "http://edited"}
+        mock_mod.assert_called_once_with("path.png", "dog")
+
+
+def test_regenerate_image_route():
+    with patch.object(
+        image_routes.image_agent,
+        "regenerate_image",
+        return_value="http://var",
+    ) as mock_reg:
+        response = client.post(
+            "/images/regenerate-image", json={"image_path": "old.png"}
+        )
+        assert response.status_code == 200
+        assert response.json() == {"image_url": "http://var"}
+        mock_reg.assert_called_once_with("old.png")
+
+
 def test_generate_audio_route():
     with patch.object(
         tts_routes.tts_agent,
