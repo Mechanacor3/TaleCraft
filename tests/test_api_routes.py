@@ -124,18 +124,24 @@ def test_assemble_video_route():
         "assemble_video",
         return_value="/tmp/out.mp4",
     ) as mock_video:
-        payload = {"images": ["i"], "audio": "a"}
+        payload = {
+            "images": ["i"],
+            "audio_clips": ["a"],
+            "output_path": "out.mp4",
+        }
         response = client.post("/videos/assemble_video", json=payload)
         assert response.status_code == 200
         assert response.json() == {"video_path": "/tmp/out.mp4"}
-        mock_video.assert_called_once_with(["i"], "a")
+        mock_video.assert_called_once_with(["i"], ["a"], "out.mp4")
 
 
 def test_preview_video_route():
     payload = {"video_path": "demo.mp4"}
     response = client.post("/videos/preview_video", json=payload)
     assert response.status_code == 200
-    assert response.json() == {"preview_url": {"message": "Preview generated", "video_path": "demo.mp4"}}
+    assert response.json() == {
+        "preview_url": {"message": "Preview generated", "video_path": "demo.mp4"}
+    }
 
 
 def test_generate_image_missing_prompt():
