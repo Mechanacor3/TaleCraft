@@ -5,7 +5,6 @@ from typing import Literal, List, Optional
 from agents import Agent, ItemHelpers, Runner, TResponseInputItem, trace
 
 
-
 @dataclass
 class EvaluationFeedback:
     score: Literal["pass", "needs_improvement", "fail"]
@@ -34,7 +33,9 @@ class StoryAgent:
             output_type=EvaluationFeedback,
         )
 
-    async def generate_outline(self, story_idea: str, max_turns:int = 1, trace_id:str|None=None) -> str:
+    async def generate_outline(
+        self, story_idea: str, max_turns: int = 1, trace_id: str | None = None
+    ) -> str:
         """
         Generate a story outline based on the provided story idea.
         """
@@ -42,7 +43,7 @@ class StoryAgent:
             raise ValueError("Max turns must be greater than 0.")
         if max_turns > 5:
             raise ValueError("Max turns must be less than 5.")
-        
+
         input_items: List[TResponseInputItem] = [
             {"content": story_idea, "role": "user"}
         ]
@@ -98,9 +99,8 @@ class StoryAgent:
             self.story_outline_generator,
             input_items,
         )
-        return  ItemHelpers.text_message_outputs(
-            story_outline_result.new_items
-        )
+        return ItemHelpers.text_message_outputs(story_outline_result.new_items)
+
 
 async def main() -> None:
     story_agent = StoryAgent()
