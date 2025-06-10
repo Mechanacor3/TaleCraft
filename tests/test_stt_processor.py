@@ -29,3 +29,17 @@ def test_transcribe_audio_missing_file():
     stt = STTProcessor(model="whisper-1")
     with pytest.raises(FileNotFoundError):
         stt.transcribe_audio("nonexistent.mp3")
+
+
+def test_transcribe_audio_openai_error(monkeypatch, tmp_path):
+    """STTProcessor should wrap OpenAI errors in RuntimeError."""
+    audio_path = tmp_path / "clip.mp3"
+    audio_path.write_bytes(b"data")
+
+    def raise_error(model, file, **kwargs):
+        raise openai.OpenAIError("boom")
+
+    monkeypatch.setattr(openai.Audio, "transcribe", raise_error)
+    stt = STTProcessor(model="whisper-1")
+    with pytest.raises(RuntimeError, match="OpenAI API error: boom"):
+        stt.transcribe_audio(str(audio_path))
