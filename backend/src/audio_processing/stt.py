@@ -5,7 +5,7 @@ class STTProcessor:
     def transcribe_audio(self, audio_file):
         """
         Convert speech to text using the specified model.
-        
+
         Parameters:
         audio_file (str): Path to the audio file to be transcribed.
 
@@ -18,7 +18,7 @@ class STTProcessor:
     def set_model(self, model):
         """
         Set the model for speech-to-text processing.
-        
+
         Parameters:
         model (str): The model to be used for transcription.
         """
@@ -27,7 +27,7 @@ class STTProcessor:
     def get_model(self):
         """
         Get the current model used for speech-to-text processing.
-        
+
         Returns:
         str: The current model.
         """
