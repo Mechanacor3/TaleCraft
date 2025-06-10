@@ -8,7 +8,8 @@ video_agent = VideoAssemblyAgent()
 
 class AssembleVideoRequest(BaseModel):
     images: list[str]
-    audio: str
+    audio_clips: list[str]
+    output_path: str
 
 
 class PreviewVideoRequest(BaseModel):
@@ -17,10 +18,15 @@ class PreviewVideoRequest(BaseModel):
 
 @router.post("/assemble_video")
 async def assemble_video(request: AssembleVideoRequest):
-    if not request.images or not request.audio:
-        raise HTTPException(status_code=400, detail="Images and audio are required.")
+    if not request.images or not request.audio_clips or not request.output_path:
+        raise HTTPException(
+            status_code=400,
+            detail="Images, audio clips, and output path are required.",
+        )
 
-    video_path = video_agent.assemble_video(request.images, request.audio)
+    video_path = video_agent.assemble_video(
+        request.images, request.audio_clips, request.output_path
+    )
     return {"video_path": video_path}
 
 

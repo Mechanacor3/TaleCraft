@@ -4,6 +4,7 @@ from moviepy.audio.io.AudioFileClip import AudioFileClip
 from moviepy.video.VideoClip import ImageClip
 from moviepy.video.compositing.CompositeVideoClip import concatenate_videoclips
 
+
 class VideoAssemblyAgent:
     def __init__(self, fps: int = 24):
         self.fps = fps
