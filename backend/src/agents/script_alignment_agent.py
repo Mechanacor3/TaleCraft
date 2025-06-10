@@ -1,11 +1,11 @@
 class ScriptAlignmentAgent:
     def __init__(self):
-        pass
+        self.script: list[str] = []
 
     def align_script_with_images(self, images, script):
         """
         Aligns a list of script dialogue lines with the given images.
-        
+
         Parameters:
         - images: List of image paths or URLs.
         - script: List of dialogue strings to be aligned.
@@ -15,10 +15,9 @@ class ScriptAlignmentAgent:
         """
         aligned_script = []
         for i, image in enumerate(images):
-            aligned_script.append({
-                'image': image,
-                'dialogue': script[i] if i < len(script) else ''
-            })
+            aligned_script.append(
+                {"image": image, "dialogue": script[i] if i < len(script) else ""}
+            )
         return aligned_script
 
     def adjust_dialogue(self, aligned_script, index, new_dialogue):
@@ -34,7 +33,7 @@ class ScriptAlignmentAgent:
         - updated_script: The updated aligned script with the modified dialogue.
         """
         if 0 <= index < len(aligned_script):
-            aligned_script[index]['dialogue'] = new_dialogue
+            aligned_script[index]["dialogue"] = new_dialogue
         return aligned_script
 
     def generate_script_summary(self, aligned_script):
@@ -51,3 +50,9 @@ class ScriptAlignmentAgent:
         for item in aligned_script:
             summary += f"Image: {item['image']}, Dialogue: {item['dialogue']}\n"
         return summary.strip()
+
+    def update_script(self, new_script):
+        """Replace the stored script and return the updated version."""
+        self.script = list(new_script)
+        return self.script
+

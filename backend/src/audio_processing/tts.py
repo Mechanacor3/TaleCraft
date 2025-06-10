@@ -1,5 +1,5 @@
 class TTSProcessor:
-    def __init__(self, voice_style='default'):
+    def __init__(self, voice_style="default"):
         self.voice_style = voice_style
 
     def set_voice_style(self, voice_style):
@@ -12,5 +12,5 @@ class TTSProcessor:
 
     def save_audio(self, audio_clip, filename):
         # Placeholder for saving audio logic
-        with open(filename, 'w') as f:
+        with open(filename, "w") as f:
             f.write(audio_clip)
