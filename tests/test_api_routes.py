@@ -110,3 +110,45 @@ def test_preview_video_route():
     assert response.status_code == 200
     assert response.json() == {"preview_url": {"message": "Preview generated", "video_path": "demo.mp4"}}
 
+
+def test_generate_image_missing_prompt():
+    with patch.object(image_routes.image_agent, "generate_image") as mock_img:
+        response = client.post("/images/generate-image", json={})
+        assert response.status_code == 422
+        mock_img.assert_not_called()
+
+
+def test_align_script_missing_fields():
+    with patch.object(script_routes.script_agent, "align_script_with_images") as mock_align:
+        response = client.post("/scripts/align_script", json={})
+        assert response.status_code == 422
+        mock_align.assert_not_called()
+
+
+def test_edit_script_missing_body():
+    with patch.object(script_routes.script_agent, "update_script") as mock_edit:
+        response = client.put("/scripts/edit_script", json={})
+        assert response.status_code == 422
+        mock_edit.assert_not_called()
+
+
+def test_generate_audio_missing_params():
+    with patch.object(tts_routes.tts_agent, "generate_audio") as mock_audio:
+        response = client.post("/tts/generate_audio", json={"text": "hello"})
+        assert response.status_code == 422
+        mock_audio.assert_not_called()
+
+
+def test_assemble_video_missing_audio():
+    with patch.object(video_routes.video_agent, "assemble_video") as mock_video:
+        response = client.post("/videos/assemble_video", json={"images": ["i"]})
+        assert response.status_code == 422
+        mock_video.assert_not_called()
+
+
+def test_preview_video_missing_path():
+    with patch.object(video_routes.video_agent, "preview_video") as mock_preview:
+        response = client.post("/videos/preview_video", json={})
+        assert response.status_code == 422
+        mock_preview.assert_not_called()
+
