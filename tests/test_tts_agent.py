@@ -34,3 +34,13 @@ def test_adjust_audio_properties_modifies_clip():
     faster = agent.adjust_audio_properties(clip, {"speed": 2.0})
     assert len(faster) < len(clip)
 
+
+def test_generate_audio_clip_uses_processor():
+    processor = MagicMock(spec=TTSProcessor)
+    processor.generate_audio.return_value = "result"
+    agent = TTSAgent(processor)
+
+    clip = agent.generate_audio_clip("hi")
+
+    processor.generate_audio.assert_called_once_with("hi")
+    assert clip == "result"
