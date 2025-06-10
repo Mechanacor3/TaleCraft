@@ -4,11 +4,11 @@ class ScriptAlignmentAgent:
 
     def align_script_with_images(self, images, script):
         """
-        Aligns the provided script with the given images.
+        Aligns a list of script dialogue lines with the given images.
         
         Parameters:
         - images: List of image paths or URLs.
-        - script: The script text to be aligned.
+        - script: List of dialogue strings to be aligned.
 
         Returns:
         - aligned_script: A structured representation of the script aligned with images.
