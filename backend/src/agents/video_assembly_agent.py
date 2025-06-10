@@ -1,5 +1,3 @@
-
-
 class VideoAssemblyAgent:
     def __init__(self):
         pass
@@ -14,4 +12,6 @@ class VideoAssemblyAgent:
 
     def upload_to_youtube(self, video_path, title, description):
         # Logic to upload the video to YouTube
-        return jsonify({"message": "Video uploaded to YouTube", "video_path": video_path})
+        return jsonify(
+            {"message": "Video uploaded to YouTube", "video_path": video_path}
+        )

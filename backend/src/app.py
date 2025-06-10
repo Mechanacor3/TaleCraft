@@ -11,4 +11,5 @@ app.include_router(video_routes.router, prefix="/videos", tags=["videos"])
 
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(app, host="0.0.0.0", port=8000)

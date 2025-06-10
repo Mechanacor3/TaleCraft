@@ -55,3 +55,4 @@ class ScriptAlignmentAgent:
         """Replace the stored script and return the updated version."""
         self.script = list(new_script)
         return self.script
+
