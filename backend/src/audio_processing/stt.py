@@ -12,8 +12,22 @@ class STTProcessor:
         Returns:
         str: Transcribed text from the audio.
         """
-        # Implement the transcription logic using OpenAI Whisper
-        pass
+        import os
+        import openai
+        from openai import OpenAIError
+
+        if not os.path.isfile(audio_file):
+            raise FileNotFoundError(f"Audio file '{audio_file}' not found")
+
+        try:
+            with open(audio_file, "rb") as f:
+                result = openai.Audio.transcribe(self.model, f)
+        except OpenAIError as exc:
+            raise RuntimeError(f"OpenAI API error: {exc}") from exc
+        except Exception as exc:
+            raise RuntimeError(f"Failed to transcribe audio: {exc}") from exc
+
+        return result.get("text", "") if isinstance(result, dict) else str(result)
 
     def set_model(self, model):
         """
