@@ -1,6 +1,6 @@
 class ScriptAlignmentAgent:
     def __init__(self):
-        pass
+        self.script: list[str] = []
 
     def align_script_with_images(self, images, script):
         """
@@ -50,3 +50,9 @@ class ScriptAlignmentAgent:
         for item in aligned_script:
             summary += f"Image: {item['image']}, Dialogue: {item['dialogue']}\n"
         return summary.strip()
+
+    def update_script(self, new_script):
+        """Replace the stored script and return the updated version."""
+        self.script = list(new_script)
+        return self.script
+
