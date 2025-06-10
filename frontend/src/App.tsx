@@ -4,12 +4,12 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Outline from "./pages/Outline";
-import Storyboard from "./pages/Storyboard";
-import ImageGeneration from "./pages/ImageGeneration";
-import ScriptAlignment from "./pages/ScriptAlignment";
-import TextToSpeech from "./pages/TextToSpeech";
-import VideoAssembly from "./pages/VideoAssembly";
-import FinalProduction from "./pages/FinalProduction";
+import Storyboard from "./components/Storyboard";
+import ImageGeneration from "./components/ImageGeneration";
+import ScriptAlignment from "./components/ScriptAlignment";
+import TextToSpeech from "./components/TextToSpeech";
+import VideoAssembly from "./components/VideoAssembly";
+import FinalProduction from "./components/FinalProduction";
 
 const App: React.FC = () => {
   return (
