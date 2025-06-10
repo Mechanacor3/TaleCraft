@@ -23,7 +23,7 @@ class StoryAgent:
             ),
         )
         self.evaluator = Agent[None](
-            name="Story Evalutator Agent",
+            name="Story Evaluator Agent",
             model="o3-mini",
             instructions=(
                 "You evaluate a story outline and decide if it's good enough. "
