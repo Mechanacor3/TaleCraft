@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -17,16 +17,16 @@ const App: React.FC = () => {
       <div className="flex flex-col min-h-screen">
         <Header />
         <main className="flex-grow">
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/outline" component={Outline} />
-            <Route path="/storyboard" component={Storyboard} />
-            <Route path="/image-generation" component={ImageGeneration} />
-            <Route path="/script-alignment" component={ScriptAlignment} />
-            <Route path="/text-to-speech" component={TextToSpeech} />
-            <Route path="/video-assembly" component={VideoAssembly} />
-            <Route path="/final-production" component={FinalProduction} />
-          </Switch>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/outline" element={<Outline />} />
+            <Route path="/storyboard" element={<Storyboard />} />
+            <Route path="/image-generation" element={<ImageGeneration />} />
+            <Route path="/script-alignment" element={<ScriptAlignment />} />
+            <Route path="/text-to-speech" element={<TextToSpeech />} />
+            <Route path="/video-assembly" element={<VideoAssembly />} />
+            <Route path="/final-production" element={<FinalProduction />} />
+          </Routes>
         </main>
         <Footer />
       </div>
