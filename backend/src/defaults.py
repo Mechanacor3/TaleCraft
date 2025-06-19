@@ -17,4 +17,8 @@ DEFAULT_SCRIPT_LINES = [
     "Finally demo line three completes the sample.",
 ]
 
+# Story outline returned by the story agent when demo mode is enabled.
+DEFAULT_STORY_OUTLINE = "This is a sample story outline."
+
+
 # Additional defaults can be added here as needed.
