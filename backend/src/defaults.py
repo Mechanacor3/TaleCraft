@@ -10,4 +10,7 @@ DEFAULT_IMAGE_PATH = str(
 # Text returned by the speech-to-text processor in demo mode.
 DEFAULT_TRANSCRIPTION = "This is a sample transcription."
 
+# Story outline returned by the story agent when demo mode is enabled.
+DEFAULT_STORY_OUTLINE = "This is a sample story outline."
+
 # Additional defaults can be added here as needed.
