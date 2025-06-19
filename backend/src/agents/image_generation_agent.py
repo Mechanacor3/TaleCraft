@@ -4,6 +4,9 @@ from typing import Optional
 import openai
 import requests
 
+from ..config import Config
+from ..defaults import DEFAULT_IMAGE_PATH
+
 
 class ImageGenerationAgent:
     def __init__(self, openai_api_key: Optional[str] = None):
@@ -15,12 +18,19 @@ class ImageGenerationAgent:
 
     def generate_image(self, prompt: str) -> str:
         """Generate an image based on the provided prompt using DALL·E."""
+        if Config.DEMO_MODE:
+            # In demo mode return a placeholder image instead of calling OpenAI.
+            return DEFAULT_IMAGE_PATH
+
         self._set_api_key()
         response = openai.Image.create(prompt=prompt, n=1)
         return response["data"][0]["url"]
 
     def modify_image(self, image_path: str, new_prompt: str) -> str:
         """Modify an existing image based on a new prompt."""
+        if Config.DEMO_MODE:
+            return DEFAULT_IMAGE_PATH
+
         self._set_api_key()
         with open(image_path, "rb") as img:
             response = openai.Image.create_edit(image=img, prompt=new_prompt, n=1)
@@ -28,6 +38,9 @@ class ImageGenerationAgent:
 
     def regenerate_image(self, image_path: str) -> str:
         """Regenerate an image based on its ID."""
+        if Config.DEMO_MODE:
+            return DEFAULT_IMAGE_PATH
+
         self._set_api_key()
         with open(image_path, "rb") as img:
             response = openai.Image.create_variation(image=img, n=1)

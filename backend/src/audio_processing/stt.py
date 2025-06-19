@@ -1,3 +1,7 @@
+from ..config import Config
+from ..defaults import DEFAULT_TRANSCRIPTION
+
+
 class STTProcessor:
     def __init__(self, model):
         self.model = model
@@ -18,6 +22,9 @@ class STTProcessor:
 
         if not os.path.isfile(audio_file):
             raise FileNotFoundError(f"Audio file '{audio_file}' not found")
+
+        if Config.DEMO_MODE:
+            return DEFAULT_TRANSCRIPTION
 
         try:
             with open(audio_file, "rb") as f:
