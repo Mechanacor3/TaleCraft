@@ -63,9 +63,11 @@ pytest
 ### Demo mode
 
 Set the environment variable `DEMO_MODE=true` to bypass external OpenAI calls.
+
 Default images and transcription text will be returned instead, making it easy
 to test the full stack offline. Video assembly writes a text file describing
 the provided images and audio rather than producing an actual video.
+
 
 ## Usage Guidelines
 
