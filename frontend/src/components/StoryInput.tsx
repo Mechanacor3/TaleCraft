@@ -2,15 +2,27 @@ import React, { useState } from "react";
 
 const StoryInput: React.FC = () => {
   const [storyIdea, setStoryIdea] = useState<string>("");
+  const [outline, setOutline] = useState<string | null>(null);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setStoryIdea(event.target.value);
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    // Handle story idea submission (e.g., send to backend or update state)
-    console.log("Story Idea Submitted:", storyIdea);
+    try {
+      const response = await fetch("/stories/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ story_idea: storyIdea }),
+      });
+      const data = await response.json();
+      setOutline(data.outline);
+    } catch (error) {
+      console.error("Error generating outline:", error);
+    }
   };
 
   return (
@@ -30,6 +42,12 @@ const StoryInput: React.FC = () => {
           Submit
         </button>
       </form>
+      {outline && (
+        <div className="mt-4 border rounded p-2">
+          <h3 className="font-semibold">Generated Outline</h3>
+          <p>{outline}</p>
+        </div>
+      )}
     </div>
   );
 };

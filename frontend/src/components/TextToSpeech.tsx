@@ -16,7 +16,7 @@ const TextToSpeech: React.FC = () => {
   const generateAudio = async () => {
     // Placeholder for audio generation logic
     // This should call the TTS API and set the audio URL
-    const response = await fetch("/api/generate-audio", {
+    const response = await fetch("/tts/generate_audio", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
