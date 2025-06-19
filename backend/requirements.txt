@@ -7,4 +7,3 @@ pydub
 pillow
 moviepy
 requests
-pytest
