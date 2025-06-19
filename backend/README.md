@@ -48,6 +48,12 @@ shortvideo-story-creator-backend
    python src/app.py
    ```
 
+### Demo mode
+
+Set the environment variable `DEMO_MODE=true` to bypass external OpenAI calls.
+Default images and transcription text will be returned instead, making it easy
+to test the full stack offline.
+
 ## Usage Guidelines
 
 - The backend provides various API endpoints for interacting with the story creation process, including story generation, image creation, script alignment, audio processing, and video assembly.
