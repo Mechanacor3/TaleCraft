@@ -10,6 +10,9 @@ DEFAULT_IMAGE_PATH = str(
 # Text returned by the speech-to-text processor in demo mode.
 DEFAULT_TRANSCRIPTION = "This is a sample transcription."
 
+# Text returned by the text-to-speech agent when audio generation is bypassed.
+DEFAULT_TTS_AUDIO = "This is a demo audio clip."
+
 # Default script lines returned by the script alignment agent in demo mode.
 DEFAULT_SCRIPT_LINES = [
     "This is a demo script line one.",
