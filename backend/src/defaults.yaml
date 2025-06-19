@@ -1,0 +1,8 @@
+image_path: static/default.png
+transcription: This is a sample transcription.
+tts_audio: This is a demo audio clip.
+script_lines:
+  - This is a demo script line one.
+  - Here is demo line two matching an image.
+  - Finally demo line three completes the sample.
+story_outline: This is a sample story outline.

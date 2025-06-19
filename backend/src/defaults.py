@@ -1,27 +1,21 @@
-"""Default data used when DEMO_MODE is enabled."""
+"""Default data used when ``DEMO_MODE`` is enabled."""
 
 from pathlib import Path
+import yaml
 
-# Path to a placeholder image served when image generation is bypassed.
-DEFAULT_IMAGE_PATH = str(
-    Path(__file__).resolve().parent.parent / "static" / "default.png"
-)
+_DEFAULTS_FILE = Path(__file__).with_name("defaults.yaml")
 
-# Text returned by the speech-to-text processor in demo mode.
-DEFAULT_TRANSCRIPTION = "This is a sample transcription."
+with _DEFAULTS_FILE.open("r", encoding="utf-8") as f:
+    _DATA = yaml.safe_load(f)
 
-# Text returned by the text-to-speech agent when audio generation is bypassed.
-DEFAULT_TTS_AUDIO = "This is a demo audio clip."
+DEFAULT_IMAGE_PATH = str(Path(__file__).resolve().parent.parent / _DATA["image_path"])
 
-# Default script lines returned by the script alignment agent in demo mode.
-DEFAULT_SCRIPT_LINES = [
-    "This is a demo script line one.",
-    "Here is demo line two matching an image.",
-    "Finally demo line three completes the sample.",
-]
+DEFAULT_TRANSCRIPTION: str = _DATA["transcription"]
 
-# Story outline returned by the story agent when demo mode is enabled.
-DEFAULT_STORY_OUTLINE = "This is a sample story outline."
+DEFAULT_TTS_AUDIO: str = _DATA["tts_audio"]
 
+DEFAULT_SCRIPT_LINES: list[str] = _DATA["script_lines"]
 
-# Additional defaults can be added here as needed.
+DEFAULT_STORY_OUTLINE: str = _DATA["story_outline"]
+
+# Additional defaults can be added in ``defaults.yaml`` as needed.
