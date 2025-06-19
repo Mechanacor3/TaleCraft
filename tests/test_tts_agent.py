@@ -3,6 +3,7 @@ import wave
 import os
 
 from backend.src.agents.tts_agent import TTSAgent
+from backend.src.agents import tts_agent
 from backend.src.audio_processing.tts import TTSProcessor
 
 
@@ -55,3 +56,15 @@ def test_generate_audio_clip_uses_processor():
 
     processor.generate_audio.assert_called_once_with("hi")
     assert clip == "result"
+
+
+def test_generate_audio_in_demo_mode(monkeypatch):
+    processor = MagicMock(spec=TTSProcessor)
+    agent = TTSAgent(processor)
+    agent._available_voices = ["default"]
+    monkeypatch.setattr(tts_agent.Config, "DEMO_MODE", True)
+
+    result = agent.generate_audio("demo", "default")
+
+    assert "demo audio clip" in result
+    processor.generate_audio.assert_not_called()

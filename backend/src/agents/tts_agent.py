@@ -5,6 +5,8 @@ import tempfile
 import ffmpeg
 
 from ..audio_processing.tts import TTSProcessor
+from ..config import Config
+from ..defaults import DEFAULT_TTS_AUDIO
 
 
 class TTSAgent:
@@ -25,6 +27,8 @@ class TTSAgent:
         """Generate audio for the given text using a specific voice style."""
 
         self.select_voice_style(voice_style)
+        if Config.DEMO_MODE:
+            return f"{DEFAULT_TTS_AUDIO} ({voice_style}): {text}"
         return self.tts_processor.generate_audio(text)
 
     def generate_audio_clip(self, text: str) -> Any:  # Backwards compatibility
