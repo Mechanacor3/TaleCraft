@@ -41,6 +41,7 @@ The ShortVideo Story Creator App is an interactive, browser-based application po
 2. Install dependencies using `npm install`.
 3. Start the development server with `npm start`.
 4. Open your browser and navigate to `http://localhost:3000` to view the application.
+5. Build a production bundle with `npm run build`.
 
 ## License
 
