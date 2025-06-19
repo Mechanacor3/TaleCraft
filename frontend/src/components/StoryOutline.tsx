@@ -8,9 +8,21 @@ const StoryOutline: React.FC = () => {
     setUserInput(event.target.value);
   };
 
-  const generateOutline = () => {
-    // Placeholder for API call to generate story outline
-    setStoryOutline(`Generated outline for: ${userInput}`);
+  const generateOutline = async () => {
+    try {
+      const response = await fetch("/stories/refine", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ outline: storyOutline, feedback: userInput }),
+      });
+      const data = await response.json();
+      setStoryOutline(data.outline);
+      setUserInput("");
+    } catch (error) {
+      console.error("Error refining outline:", error);
+    }
   };
 
   return (

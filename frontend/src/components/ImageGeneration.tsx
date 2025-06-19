@@ -9,7 +9,7 @@ const ImageGeneration: React.FC = () => {
     setLoading(true);
     try {
       // Call the DALL·E API to generate images based on the prompt
-      const response = await fetch("/api/generate-images", {
+      const response = await fetch("/images/generate-image", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
