@@ -37,6 +37,7 @@ shortvideo-story-creator-backend
    pip install -r requirements.txt
    # Install extra tools for development and testing
    pip install -r requirements-dev.txt
+   # requirements-dev.txt installs pytest, pytest-asyncio and black
    ```
 
 3. **Configuration:**
@@ -47,6 +48,17 @@ shortvideo-story-creator-backend
    ```bash
    python src/app.py
    ```
+
+## Running Tests
+
+Install the development requirements first:
+```bash
+pip install -r requirements-dev.txt
+```
+Then run the tests with `pytest`:
+```bash
+pytest
+```
 
 ### Demo mode
 
