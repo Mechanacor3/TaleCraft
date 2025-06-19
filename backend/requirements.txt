@@ -6,5 +6,4 @@ httpx
 pillow
 moviepy
 requests
-pytest
 ffmpeg-python

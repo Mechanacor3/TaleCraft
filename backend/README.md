@@ -35,6 +35,8 @@ shortvideo-story-creator-backend
    Then install the required packages:
    ```bash
    pip install -r requirements.txt
+   # Install extra tools for development and testing
+   pip install -r requirements-dev.txt
    ```
 
 3. **Configuration:**
@@ -45,6 +47,12 @@ shortvideo-story-creator-backend
    ```bash
    python src/app.py
    ```
+
+### Demo mode
+
+Set the environment variable `DEMO_MODE=true` to bypass external OpenAI calls.
+Default images and transcription text will be returned instead, making it easy
+to test the full stack offline.
 
 ## Usage Guidelines
 
