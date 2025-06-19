@@ -5,7 +5,8 @@ An interactive, agentic web app powered by OpenAI to create AI-driven storyboard
 
 To experiment with the complete stack locally, you can run the backend in
 `DEMO_MODE`. This bypasses all OpenAI endpoints and serves a small frontend build
-mounted at the FastAPI root path.
+mounted at the FastAPI root path. In this mode, video assembly outputs a text
+description instead of a real video.
 
 Steps:
 
