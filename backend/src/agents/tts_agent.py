@@ -1,6 +1,8 @@
 from typing import Any, Dict, Iterable, List
 
-from pydub import AudioSegment
+import os
+import tempfile
+import ffmpeg
 
 from ..audio_processing.tts import TTSProcessor
 
@@ -30,18 +32,25 @@ class TTSAgent:
         return audio_clip
 
     def adjust_audio_properties(
-        self, audio_clip: AudioSegment, properties: Dict[str, Any]
-    ) -> AudioSegment:
-        """Adjust volume and speed of an audio clip."""
+        self,
+        input_path: str,
+        properties: Dict[str, Any],
+        output_path: str | None = None,
+    ) -> str:
+        """Adjust volume and speed of an audio file using ffmpeg."""
 
-        result = audio_clip
+        stream = ffmpeg.input(input_path)
         if "volume" in properties:
-            result = result + float(properties["volume"])
+            stream = stream.filter("volume", f"{float(properties['volume'])}dB")
         if "speed" in properties:
             speed = float(properties["speed"])
             if speed != 1.0:
-                result = result.speedup(playback_speed=speed)
-        return result
+                stream = stream.filter("atempo", speed)
+        if output_path is None:
+            fd, output_path = tempfile.mkstemp(suffix=os.path.splitext(input_path)[1])
+            os.close(fd)
+        ffmpeg.output(stream, output_path).overwrite_output().run(quiet=True)
+        return output_path
 
     def get_available_voices(self) -> Iterable[str]:
         """Return a list of supported voice styles."""

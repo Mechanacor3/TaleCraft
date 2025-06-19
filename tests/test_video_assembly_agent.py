@@ -1,8 +1,7 @@
-import os
 from pathlib import Path
 
 from backend.src.agents.video_assembly_agent import VideoAssemblyAgent
-from pydub import AudioSegment
+import wave
 from PIL import Image
 
 
@@ -12,7 +11,12 @@ def create_image(path: Path) -> None:
 
 
 def create_audio(path: Path, duration: int = 500) -> None:
-    AudioSegment.silent(duration=duration).export(path, format="wav")
+    nframes = int(44100 * duration / 1000)
+    with wave.open(str(path), "w") as wf:
+        wf.setnchannels(1)
+        wf.setsampwidth(2)
+        wf.setframerate(44100)
+        wf.writeframes(b"\x00\x00" * nframes)
 
 
 def test_assemble_video_creates_file(tmp_path: Path) -> None:

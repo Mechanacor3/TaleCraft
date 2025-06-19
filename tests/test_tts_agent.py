@@ -1,8 +1,18 @@
 from unittest.mock import MagicMock
-from pydub import AudioSegment
+import wave
+import os
 
 from backend.src.agents.tts_agent import TTSAgent
 from backend.src.audio_processing.tts import TTSProcessor
+
+
+def create_silent_wav(path: str, duration_ms: int) -> None:
+    nframes = int(44100 * duration_ms / 1000)
+    with wave.open(str(path), "w") as wf:
+        wf.setnchannels(1)
+        wf.setsampwidth(2)
+        wf.setframerate(44100)
+        wf.writeframes(b"\x00\x00" * nframes)
 
 
 def test_select_voice_style_updates_processor():
@@ -24,15 +34,16 @@ def test_generate_audio_delegates_to_processor():
     assert result == "clip"
 
 
-def test_adjust_audio_properties_modifies_clip():
-    clip = AudioSegment.silent(duration=1000)
+def test_adjust_audio_properties_modifies_clip(tmp_path):
+    wav = tmp_path / "in.wav"
+    create_silent_wav(wav, 1000)
     agent = TTSAgent(MagicMock())
 
-    louder = agent.adjust_audio_properties(clip, {"volume": 5})
-    assert len(louder) == len(clip)
+    louder = agent.adjust_audio_properties(str(wav), {"volume": 5})
+    assert os.path.exists(louder)
 
-    faster = agent.adjust_audio_properties(clip, {"speed": 2.0})
-    assert len(faster) < len(clip)
+    faster = agent.adjust_audio_properties(str(wav), {"speed": 2.0})
+    assert os.path.exists(faster)
 
 
 def test_generate_audio_clip_uses_processor():
