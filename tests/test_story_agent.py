@@ -58,3 +58,16 @@ async def test_refine_outline_returns_new(monkeypatch):
 
     result = await agent.refine_outline("old", "feedback")
     assert result == "new outline"
+
+
+@pytest.mark.asyncio
+async def test_generate_outline_demo_mode(monkeypatch):
+    monkeypatch.setenv("DEMO_MODE", "true")
+    import importlib
+
+    import backend.src.agents.story_agent as sa
+
+    importlib.reload(sa)
+    agent = sa.StoryAgent()
+    outline = await agent.generate_outline("idea")
+    assert outline == sa.DEFAULT_STORY_OUTLINE

@@ -13,4 +13,15 @@ DEFAULT_TRANSCRIPTION = "This is a sample transcription."
 # Text returned by the text-to-speech agent when audio generation is bypassed.
 DEFAULT_TTS_AUDIO = "This is a demo audio clip."
 
+# Default script lines returned by the script alignment agent in demo mode.
+DEFAULT_SCRIPT_LINES = [
+    "This is a demo script line one.",
+    "Here is demo line two matching an image.",
+    "Finally demo line three completes the sample.",
+]
+
+# Story outline returned by the story agent when demo mode is enabled.
+DEFAULT_STORY_OUTLINE = "This is a sample story outline."
+
+
 # Additional defaults can be added here as needed.
