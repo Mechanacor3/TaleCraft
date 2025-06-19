@@ -1,5 +1,7 @@
 import pytest
 from backend.src.agents.script_alignment_agent import ScriptAlignmentAgent
+from backend.src.defaults import DEFAULT_SCRIPT_LINES, DEFAULT_IMAGE_PATH
+from backend.src.config import Config
 
 
 @pytest.fixture
@@ -39,3 +41,11 @@ def test_generate_script_summary_includes_all_entries(agent):
     summary = agent.generate_script_summary(aligned)
     assert "Image: img1.png, Dialogue: Hello" in summary
     assert "Image: img2.png, Dialogue: World" in summary
+
+
+def test_align_script_with_images_demo_mode(monkeypatch, agent):
+    monkeypatch.setattr(Config, "DEMO_MODE", True)
+    result = agent.align_script_with_images(["img.png"], ["ignored"])
+    assert len(result) == len(DEFAULT_SCRIPT_LINES)
+    assert result[0]["dialogue"] == DEFAULT_SCRIPT_LINES[0]
+    assert result[1]["image"].endswith("default.png")

@@ -1,9 +1,25 @@
+from ..config import Config
+from ..defaults import DEFAULT_IMAGE_PATH, DEFAULT_SCRIPT_LINES
+
+
 class ScriptAlignmentAgent:
     def __init__(self) -> None:
         self.script: list[str] = []
 
     def align_script_with_images(self, images, script):
         """Align a list of script dialogue lines with the given images."""
+        if Config.DEMO_MODE:
+            demo_images = images or [DEFAULT_IMAGE_PATH] * len(DEFAULT_SCRIPT_LINES)
+            return [
+                {
+                    "image": (
+                        demo_images[i] if i < len(demo_images) else DEFAULT_IMAGE_PATH
+                    ),
+                    "dialogue": line,
+                }
+                for i, line in enumerate(DEFAULT_SCRIPT_LINES)
+            ]
+
         aligned_script = []
         for i, image in enumerate(images):
             aligned_script.append(

@@ -63,8 +63,8 @@ pytest
 ### Demo mode
 
 Set the environment variable `DEMO_MODE=true` to bypass external OpenAI calls.
-Default images and transcription text will be returned instead, making it easy
-to test the full stack offline.
+Default images, transcription text, and an example aligned script will be
+returned instead, making it easy to test the full stack offline.
 
 ## Usage Guidelines
 
