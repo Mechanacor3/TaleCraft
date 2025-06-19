@@ -3,6 +3,9 @@ from __future__ import annotations
 from moviepy.audio.io.AudioFileClip import AudioFileClip
 from moviepy.video.VideoClip import ImageClip
 from moviepy.video.compositing.CompositeVideoClip import concatenate_videoclips
+from itertools import zip_longest
+
+from ..config import Config
 
 
 class VideoAssemblyAgent:
@@ -12,6 +15,13 @@ class VideoAssemblyAgent:
     def assemble_video(
         self, images: list[str], audio_clips: list[str], output_path: str
     ) -> str:
+        if Config.DEMO_MODE:
+            with open(output_path, "w", encoding="utf-8") as f:
+                for idx, (img, aud) in enumerate(zip_longest(images, audio_clips)):
+                    line = f"frame{idx}: image={img or ''}, audio={aud or ''}\n"
+                    f.write(line)
+            return output_path
+
         clips = []
         for img_path, audio_path in zip(images, audio_clips):
             audio = AudioFileClip(audio_path)

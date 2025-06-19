@@ -19,7 +19,8 @@ def create_audio(path: Path, duration: int = 500) -> None:
         wf.writeframes(b"\x00\x00" * nframes)
 
 
-def test_assemble_video_creates_file(tmp_path: Path) -> None:
+def test_assemble_video_creates_file(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.setenv("DEMO_MODE", "true")
     imgs = []
     auds = []
     for i in range(2):
@@ -29,10 +30,13 @@ def test_assemble_video_creates_file(tmp_path: Path) -> None:
         create_audio(aud)
         imgs.append(str(img))
         auds.append(str(aud))
-    output = tmp_path / "output.mp4"
+    output = tmp_path / "output.txt"
     agent = VideoAssemblyAgent()
     agent.assemble_video(imgs, auds, str(output))
     assert output.exists()
+    content = output.read_text().strip().splitlines()
+    assert len(content) == 2
+    assert "image=" in content[0]
 
 
 def test_preview_and_upload_return_dict() -> None:
