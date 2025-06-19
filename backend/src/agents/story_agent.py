@@ -3,6 +3,8 @@ from dataclasses import dataclass
 from typing import Literal, List, Optional
 
 from agents import Agent, ItemHelpers, Runner, TResponseInputItem, trace
+from ..config import Config
+from ..defaults import DEFAULT_STORY_OUTLINE
 
 
 @dataclass
@@ -39,6 +41,8 @@ class StoryAgent:
         """
         Generate a story outline based on the provided story idea.
         """
+        if Config.DEMO_MODE:
+            return DEFAULT_STORY_OUTLINE
         if max_turns < 1:
             raise ValueError("Max turns must be greater than 0.")
         if max_turns > 5:
@@ -91,6 +95,8 @@ class StoryAgent:
     async def refine_outline(self, outline: str, feedback: str) -> str:
         # Logic to refine the existing story outline based on user feedback
         # todo - convert feedback into using a feedback tool to ensure it is in the correct format
+        if Config.DEMO_MODE:
+            return DEFAULT_STORY_OUTLINE
         input_items: List[TResponseInputItem] = [
             {"content": outline, "role": "assistant"},
             {"content": f"Feedback: {feedback}", "role": "user"},
