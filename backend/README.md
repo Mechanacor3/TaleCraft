@@ -35,6 +35,8 @@ shortvideo-story-creator-backend
    Then install the required packages:
    ```bash
    pip install -r requirements.txt
+   # Install extra tools for development and testing
+   pip install -r requirements-dev.txt
    ```
 
 3. **Configuration:**
