@@ -3,8 +3,8 @@ uvicorn
 openai
 openai-agents
 httpx
-pydub
 pillow
 moviepy
 requests
 pytest
+ffmpeg-python
