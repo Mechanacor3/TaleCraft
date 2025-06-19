@@ -4,7 +4,7 @@
   "description": "An interactive, OpenAI-powered application for generating engaging stories for short videos.",
   "main": "src/index.tsx",
   "scripts": {
-    "start": "vite",
+    "start": "vite --port 3000 --debug",
     "build": "vite build",
     "serve": "vite preview"
   },
