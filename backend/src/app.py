@@ -7,10 +7,10 @@ from .config import Config
 
 app = FastAPI()
 
-if Config.DEMO_MODE:
-    # In demo mode we optionally serve a built frontend from the `frontend_dist`
-    # directory located at the repository root. This allows running the full
-    # application locally without external dependencies.
+# Optionally mount a prebuilt frontend if present. This is controlled by the
+# SERVE_FRONTEND flag rather than DEMO_MODE so the container can always serve
+# the React bundle when it is copied in during the Docker build.
+if Config.SERVE_FRONTEND:
     frontend_dir = Path(__file__).resolve().parent.parent / "frontend_dist"
     if frontend_dir.exists():
         app.mount("/", StaticFiles(directory=frontend_dir, html=True), name="frontend")

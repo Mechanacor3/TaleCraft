@@ -13,6 +13,10 @@ class Config:
     # environment when running tests or local demos.
     DEMO_MODE = os.getenv("DEMO_MODE", "False").lower() == "true"
 
+    # Serve a prebuilt frontend with the backend. Defaults to True so containers
+    # include the static assets built in the Docker image.
+    SERVE_FRONTEND = os.getenv("SERVE_FRONTEND", "True").lower() == "true"
+
     # OpenAI API configuration
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "your_openai_api_key_here")
 

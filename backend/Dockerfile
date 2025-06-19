@@ -1,19 +1,15 @@
+FROM node:20 AS frontend-builder
+WORKDIR /frontend
+COPY frontend/package*.json ./
+RUN npm install
+COPY frontend/ ./
+RUN npm run build
+
 FROM python:3.12-slim
-
-# Set the working directory
 WORKDIR /app
-
-# Copy the requirements file
 COPY requirements.txt .
-
-# Install the dependencies
 RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy the source code into the container
 COPY src/ ./src/
-
-# Expose the port the app runs on
+COPY --from=frontend-builder /frontend/dist /app/frontend_dist
 EXPOSE 8000
-
-# Command to run the application
 CMD ["uvicorn", "src.app:app", "--host", "0.0.0.0", "--port", "8000"]
