@@ -1,11 +1,11 @@
-# YouTube Story Creator Backend
+# ShortVideo Story Creator Backend
 
-This repository contains the backend for the YouTube Story Creator application, an interactive platform powered by OpenAI technologies that helps users generate engaging stories for short YouTube videos.
+This repository contains the backend for the ShortVideo Story Creator application, an interactive platform powered by OpenAI technologies that helps users generate engaging stories for short videos.
 
 ## Project Structure
 
 ```
-youtube-story-creator-backend
+shortvideo-story-creator-backend
 ├── src
 │   ├── agents                # Contains agent classes for story generation, image creation, script alignment, TTS, and video assembly.
 │   ├── audio_processing      # Contains classes and utilities for speech-to-text and text-to-speech processing.
@@ -23,7 +23,7 @@ youtube-story-creator-backend
 1. **Clone the repository:**
    ```bash
    git clone <repository-url>
-   cd youtube-story-creator-backend
+   cd shortvideo-story-creator-backend
    ```
 
 2. **Install dependencies:**

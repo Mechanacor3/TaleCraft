@@ -1,8 +1,8 @@
-# YouTube Story Creator App
+# ShortVideo Story Creator App
 
 ## Overview
 
-The YouTube Story Creator App is an interactive, browser-based application powered by OpenAI that assists users in generating engaging stories for short YouTube videos. The app allows for full interactivity at each stage of the story creation process, from initial idea input to final video production.
+The ShortVideo Story Creator App is an interactive, browser-based application powered by OpenAI that assists users in generating engaging stories for short videos. The app allows for full interactivity at each stage of the story creation process, from initial idea input to final video production.
 
 ## Features
 
@@ -12,7 +12,7 @@ The YouTube Story Creator App is an interactive, browser-based application power
 - **Script Alignment:** Create a script that aligns with images and narration, with user-editable dialogue.
 - **Text-to-Speech:** Select voice styles for narration and generate audio clips.
 - **Video Assembly:** Assemble images, narration, and animations for a final video preview.
-- **Final Production:** Export the final video and provide direct upload options to YouTube.
+- **Final Production:** Export the final video and provide direct upload options to ShortVideo.
 
 ## Tech Stack
 

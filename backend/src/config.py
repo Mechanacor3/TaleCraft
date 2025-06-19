@@ -1,4 +1,4 @@
-# Configuration settings for the YouTube Story Creator application
+# Configuration settings for the ShortVideo Story Creator application
 
 import os
 

@@ -1,7 +1,7 @@
 {
-  "name": "youtube-story-creator",
+  "name": "shortvideo-story-creator",
   "version": "1.0.0",
-  "description": "An interactive, OpenAI-powered application for generating engaging stories for YouTube videos.",
+  "description": "An interactive, OpenAI-powered application for generating engaging stories for short videos.",
   "main": "src/index.tsx",
   "scripts": {
     "start": "vite",
@@ -24,7 +24,7 @@
     "@types/react-dom": "^18.0.0"
   },
   "keywords": [
-    "youtube",
+    "shortvideo",
     "story",
     "creator",
     "openai",
