@@ -1,7 +1,7 @@
-## YouTube Story Creator App (OpenAI-powered)
+## ShortVideo Story Creator App (OpenAI-powered)
 
 ### Project Goal
-Create an interactive, browser-based, OpenAI-powered application that helps users generate engaging stories for short YouTube videos, with full interactivity at each stage.
+Create an interactive, browser-based, OpenAI-powered application that helps users generate engaging stories for short videos, with full interactivity at each stage.
 
 ---
 
@@ -79,11 +79,11 @@ Create an interactive, browser-based, OpenAI-powered application that helps user
 
 ### 5. Final Production and Export
 - Assemble final video with FFmpeg WASM.
-- Provide a direct YouTube upload option.
+- Provide a direct ShortVideo upload option.
 
 ### User Interaction:
 - Final preview and download
-- Direct upload integration to YouTube (OAuth)
+- Direct upload integration to ShortVideo (OAuth)
 
 ---
 

@@ -36,6 +36,6 @@ def test_preview_and_upload_return_dict() -> None:
     preview = agent.preview_video("demo.mp4")
     assert preview == {"message": "Preview generated", "video_path": "demo.mp4"}
 
-    upload = agent.upload_to_youtube("demo.mp4", "t", "d")
+    upload = agent.upload_to_shortvideo("demo.mp4", "t", "d")
     assert upload["video_path"] == "demo.mp4"
     assert "message" in upload

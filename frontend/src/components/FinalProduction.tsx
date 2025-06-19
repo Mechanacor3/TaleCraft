@@ -6,7 +6,7 @@ const FinalProduction: React.FC = () => {
   };
 
   const handleUpload = () => {
-    // Logic for uploading the video to YouTube
+    // Logic for uploading the video to ShortVideo
   };
 
   return (
@@ -26,7 +26,7 @@ const FinalProduction: React.FC = () => {
           className="bg-green-500 text-white px-4 py-2 rounded ml-4"
           onClick={handleUpload}
         >
-          Upload to YouTube
+          Upload to ShortVideo
         </button>
       </div>
     </div>

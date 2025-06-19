@@ -35,9 +35,11 @@ class VideoAssemblyAgent:
     def preview_video(self, video_path: str) -> dict:
         return {"message": "Preview generated", "video_path": video_path}
 
-    def upload_to_youtube(self, video_path: str, title: str, description: str) -> dict:
+    def upload_to_shortvideo(
+        self, video_path: str, title: str, description: str
+    ) -> dict:
         return {
-            "message": "Video uploaded to YouTube",
+            "message": "Video uploaded to ShortVideo",
             "video_path": video_path,
             "title": title,
         }
