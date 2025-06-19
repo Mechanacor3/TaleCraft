@@ -7,3 +7,4 @@ pillow
 moviepy
 requests
 ffmpeg-python
+PyYAML
