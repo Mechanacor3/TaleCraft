@@ -29,6 +29,10 @@ jobs:
         run: |
           npm ci --prefix frontend
 
+      - name: Install ffmpeg
+        run: |
+          sudo apt-get update && sudo apt-get install -y ffmpeg
+
       - name: Run checks
         run: |
           python -m py_compile $(git ls-files '*.py')
