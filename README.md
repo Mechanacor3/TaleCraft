@@ -1,5 +1,6 @@
 # TaleCraft
-An interactive, agentic web app powered by OpenAI to create AI-driven storyboards and short videos, enabling easy, user-driven storytelling.
+
+An interactive, agentic web app powered by OpenAI to create AI-driven storyboards and short videos, enabling easy, user-driven storytelling. The frontend now uses a tabbed layout so you can jump between stages of the workflow without losing context.
 
 ## Integration Testing
 
