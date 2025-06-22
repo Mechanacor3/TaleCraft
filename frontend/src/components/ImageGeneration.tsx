@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { apiFetch } from "../api";
 
 const ImageGeneration: React.FC = () => {
   const [prompt, setPrompt] = useState("");
@@ -9,7 +10,7 @@ const ImageGeneration: React.FC = () => {
     setLoading(true);
     try {
       // Call the DALL·E API to generate images based on the prompt
-      const response = await fetch("/images/generate-image", {
+      const response = await apiFetch("/images/generate-image", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

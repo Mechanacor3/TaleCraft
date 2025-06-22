@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { apiFetch } from "../api";
 
 const TextToSpeech: React.FC = () => {
   const [voice, setVoice] = useState<string>("default");
@@ -16,7 +17,7 @@ const TextToSpeech: React.FC = () => {
   const generateAudio = async () => {
     // Placeholder for audio generation logic
     // This should call the TTS API and set the audio URL
-    const response = await fetch("/tts/generate_audio", {
+    const response = await apiFetch("/tts/generate_audio", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

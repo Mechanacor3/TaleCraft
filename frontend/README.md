@@ -48,7 +48,8 @@ The ShortVideo Story Creator App is an interactive, browser-based application po
 Set `VITE_DEMO_MODE=true` when running the development server or building the
 frontend to enable demo mode. In this mode all workflow tabs are accessible and
 are highlighted in light red to indicate they are not yet unlocked in the normal
-flow.
+flow. The backend API endpoint can be overridden with the `VITE_DEMO_ENDPOINT`
+variable, defaulting to `http://localhost:8000`.
 
 ## License
 
