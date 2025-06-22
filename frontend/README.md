@@ -2,7 +2,7 @@
 
 ## Overview
 
-The ShortVideo Story Creator App is an interactive, browser-based application powered by OpenAI that assists users in generating engaging stories for short videos. The app allows for full interactivity at each stage of the story creation process, from initial idea input to final video production.
+The ShortVideo Story Creator App is an interactive, browser-based application powered by OpenAI that assists users in generating engaging stories for short videos. The app allows for full interactivity at each stage of the story creation process, from initial idea input to final video production. A tab bar at the top of the page guides you through the workflow, starting with an overview and continuing through story creation, image generation, audio, and video assembly.
 
 ## Features
 
