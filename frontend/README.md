@@ -43,6 +43,13 @@ The ShortVideo Story Creator App is an interactive, browser-based application po
 4. Open your browser and navigate to `http://localhost:3000` to view the application.
 5. Build a production bundle with `npm run build`.
 
+### Demo Mode
+
+Set `VITE_DEMO_MODE=true` when running the development server or building the
+frontend to enable demo mode. In this mode all workflow tabs are accessible and
+are highlighted in light red to indicate they are not yet unlocked in the normal
+flow.
+
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
