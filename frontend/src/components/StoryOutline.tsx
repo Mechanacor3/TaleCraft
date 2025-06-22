@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { apiFetch } from "../api";
 
 const StoryOutline: React.FC = () => {
   const [storyOutline, setStoryOutline] = useState<string>("");
@@ -10,7 +11,7 @@ const StoryOutline: React.FC = () => {
 
   const generateOutline = async () => {
     try {
-      const response = await fetch("/stories/refine", {
+      const response = await apiFetch("/stories/refine", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

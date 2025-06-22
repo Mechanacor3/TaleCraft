@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { apiFetch } from "../api";
 
 const StoryInput: React.FC = () => {
   const [storyIdea, setStoryIdea] = useState<string>("");
@@ -11,7 +12,7 @@ const StoryInput: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      const response = await fetch("/stories/generate", {
+      const response = await apiFetch("/stories/generate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
